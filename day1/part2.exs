@@ -1,0 +1,11 @@
+"data/d1lg.txt"
+|> File.stream!()
+|> Enum.map(&String.trim/1)
+|> Enum.chunk_by(&(&1 != ""))
+|> Enum.filter(&(&1 != [""]))
+|> Enum.map(&Enum.map(&1, fn num -> String.to_integer(num) end))
+|> Enum.map(&Enum.sum/1)
+|> Enum.sort()
+|> Enum.slice(-3..-1)
+|> Enum.sum()
+|> IO.inspect()
